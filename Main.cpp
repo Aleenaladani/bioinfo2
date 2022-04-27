@@ -21,6 +21,31 @@ int main(int argc, char* argv[])
     
     //if (argc < 2) { console::Help("   not enough arguments!");return 0; }
     //if (argc > 2) { console::Help("   too many arguments!");return 0; }
+    /*
+
+	string h = "-h";
+	string help = "--help";
+	for (int i = 0; i < argc; i++)
+	{
+		if (h.compare(argv[i]) == 0 || help.compare(argv[i]) == 0)
+		{
+			//-h or --help found
+			cout << "Help message:\n-p[PDB FILE] : required, PDB-FILE will be read \n";
+			cout << "-h/--help: Show this help message\n";
+			return 0;
+		}
+	}
+	if (argc != 3)
+	{
+		cerr << "Wrong number of arguments.\n";
+		return 1;
+	}
+	string p = "-p";
+	if (p.compare(argv[1]))
+	{
+		cerr << "No known flag.\n";
+		return 1;
+	}*/
     console::ShowHeader();
 
     // ## import file
