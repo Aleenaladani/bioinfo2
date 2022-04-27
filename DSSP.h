@@ -15,6 +15,7 @@
 #include <BALL/KERNEL/residueIterator.h>
 #include <vector>
 #include "Groups.h"
+#include "Space3D.h"
 #include <sstream>
 
 
@@ -31,17 +32,10 @@ public:
     CO_Group *CO;
     std::string toString() { 
         std::stringstream s("");
-        s << "\n ( " << NH->indices << " , " << CO->indices << " )";
+        s << "\n ( " << NH->index << " , " << CO->index << " )";
         return s.str();
     }
 
-};
-
-class WSBB_Tuple { // H-Bond in (i,j) - Format
-public:
-    WSBB_Tuple(BALL::Residue* i,BALL::Residue* j) {this->i = i;this->j = j;}
-    Residue *i; //aminosäure 1 mit Nh gruppe
-    Residue *j; //aminosäure 2 mit oh gruppe
 };
 
 
@@ -56,15 +50,9 @@ public:
 
     DSSP(BALL::System S);
 
-    void findWSBB();
+    void getGroups();
 
-    bool checkEnergy(BALL::Atom* atomN, BALL::Atom* atomO, BALL::Atom* atomH, BALL::Atom* atomC);
-   
-    bool checkDistance(BALL::Atom* atomH, BALL::Atom* atomO);
-
-    bool checkAngle(BALL::Atom* atomN, BALL::Atom* atomO, BALL::Atom* atomH);
-
-    BALL::Vector3 getHydrogenPos(BALL::Atom* atomC_N, BALL::Atom* atomC_O, BALL::Atom* atomN);
+    Vector3 calculate_H_position(Vector3 C_start, Vector3 C_end, Vector3 N_Atom );
 
     void startAlgorithm();
 
@@ -78,11 +66,10 @@ public:
 
     BALL::System S;
     
-    //Space3D Space; // Coordinate-Space with all Groups
+    Space3D space = Space3D(1,1,1,1); // Coordinate-Space with all Groups
     std::vector<NH_Group> NH_Groups;
     std::vector<CO_Group> CO_Groups;
     std::vector<IJ_Tuple> result;    // List of H-Bonds
-    std::vector<WSBB_Tuple> wsbb;
 };
 
 

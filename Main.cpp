@@ -59,11 +59,13 @@ int main(int argc, char* argv[])
     // ## >> 1a) << create DSSP and create a list of H-Bonds
 
     DSSP dssp(S);
+    dssp.getGroups();
+    cout << "bla " << endl;
     int count_hbonds_before = dssp.result.size();
     int count_atoms = S.countAtoms();
     int count_NH    = dssp.NH_Groups.size();
     int count_CO    = dssp.NH_Groups.size();
-    dssp.findWSBB();
+    
 
     // ## >> 1b) << delete all != ( i , i+3 4 5 ) from the list of H-Bonds
 
