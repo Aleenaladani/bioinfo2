@@ -14,7 +14,22 @@
 #include "../DSSP.h"
 #include "../Groups.h"
 
-TEST(DSSP_Test, findWSSB)
+TEST(DSSP_Test, getGroups)
+{
+    
+}
+
+TEST(DSSP_Test, startAlgorithm)
+{
+    
+}
+
+TEST(DSSP_Test, printResults)
+{
+    
+}
+
+TEST(DSSP_Test, createAS_File)
 {
     
 }
@@ -39,9 +54,8 @@ TEST(DSSP_Test, calculate_H_position)
     EXPECT_EQ(result , calculate_H_position(v1,v2,v3));
 }
 
-TEST(DSSP_Test, checkDistance)
+TEST(DSSP_Test, getAngle)
 {
-    /*
     Atom* H;
     Atom* N;
     H->setPosition(Vector3(1.0,2.0,3.0));
@@ -49,13 +63,11 @@ TEST(DSSP_Test, checkDistance)
     int ID = 10;
 
     NH_Group NH(H,N,ID);
+    EXPECT_EQ(10 , getAngle(NH));
 
-    EXPECT_TRUE(checkDistance(NH, 5.0));
-    EXPECT_FALSE(checkDistance(NH, 1.0));
-    EXPECT_FALSE(checkDistance(NH, 2.0));*/
 }
 
-TEST(DSSP_Test, checkEnergy)
+TEST(DSSP_Test, getDistance)
 {
     Atom* H;
     Atom* N;
@@ -64,7 +76,19 @@ TEST(DSSP_Test, checkEnergy)
     int ID = 10;
 
     NH_Group NH(H,N,ID);
-    EXPECT_EQ(10 , checkEngergy(NH, -0,5));
+    EXPECT_EQ(2.0 , getDistance(NH));
+}
+
+TEST(DSSP_Test, getEnergy)
+{
+    Atom* H;
+    Atom* N;
+    H->setPosition(Vector3(1.0,2.0,3.0));
+    N->setPosition(Vector3(1.0,2.0,5.0));
+    int ID = 10;
+
+    NH_Group NH(H,N,ID);
+    EXPECT_EQ(-0,5 , getEngergy(NH));
 }
 
 TEST(DSSP_Test, checkAngle)
@@ -78,6 +102,34 @@ TEST(DSSP_Test, checkAngle)
     NH_Group NH(H,N,ID);
     EXPECT_EQ(10 , checkAngle(NH, 120));
 
+}
+
+TEST(DSSP_Test, getDistance)
+{
+    
+    Atom* H;
+    Atom* N;
+    H->setPosition(Vector3(1.0,2.0,3.0));
+    N->setPosition(Vector3(1.0,2.0,5.0));
+    int ID = 10;
+
+    NH_Group NH(H,N,ID);
+
+    EXPECT_TRUE(checkDistance(NH, 5.0));
+    EXPECT_FALSE(checkDistance(NH, 1.0));
+    EXPECT_FALSE(checkDistance(NH, 2.0));
+}
+
+TEST(DSSP_Test, checkEnergy)
+{
+    Atom* H;
+    Atom* N;
+    H->setPosition(Vector3(1.0,2.0,3.0));
+    N->setPosition(Vector3(1.0,2.0,5.0));
+    int ID = 10;
+
+    NH_Group NH(H,N,ID);
+    EXPECT_EQ(10 , checkEngergy(NH, -0,5));
 }
 
 TEST(DSSP_Test, initNHGroup)

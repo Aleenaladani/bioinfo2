@@ -129,17 +129,17 @@ public:
         this->neg_y = abs(min_y - 3);
         this->neg_z = abs(min_z - 3);
 
-        this->size_x = neg_x + (max_x + 3);
-        this->size_y = neg_y + (max_y + 3);
-        this->size_z = neg_z + (max_z + 3);
+        this->size_x = neg_x + (max_x + 10);
+        this->size_y = neg_y + (max_y + 10);
+        this->size_z = neg_z + (max_z + 10);
 
         //
 
         this->boxsize = boxsize;
-/*
-        this->count_x = x / boxsize + 1.0;
-        this->count_y = y / boxsize + 1.0;
-        this->count_z = z / boxsize + 1.0;*/
+
+        this->count_x = size_x / boxsize + 1.0;
+        this->count_y = size_y / boxsize + 1.0;
+        this->count_z = size_z / boxsize + 1.0;
 
         for (int Z = 0; Z < count_z ; Z++) {
             std::vector<std::vector<Box3D>> y_axis;
@@ -162,7 +162,16 @@ public:
  *
  * */
     void print(){
-        int item_count = 0; int box_count = Space[0][0].size() * Space[0].size() * Space.size();
+        int item_count = 0;
+        for (int Z = 0; Z < count_z ; Z++) {
+            for (int Y = 0; Y < count_y ; Y++) {
+                for (int X = 0; X < count_x; X++) {
+                    item_count += Space[Z][Y][X].CO_Groups.size();
+                    item_count += Space[Z][Y][X].NH_Groups.size();
+                }
+            }
+        }
+        int box_count = Space[0][0].size() * Space[0].size() * Space.size();
 
         std::cout  << C::BBLUE << "\n [Space3D]" << " Boxsize: " << boxsize << " Boxcount: " << box_count << " Itemcount: " << item_count << C::BLUE
                                << "\n x " << size_x << " boxes: " << Space[0][0].size()
